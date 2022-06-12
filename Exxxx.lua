@@ -461,11 +461,11 @@ function Library.Load(UiName)
 						end)
 
 						Connect(InsideButton.MouseButton1Click, function()
-							Tween(DropDownFrame, newTweenInfo(0.15, Enum.EasingStyle.Sine, Enum.EasingDirection.InOut), {Size = (Open and newUDim2(0,131,0,140)) or newUDim2(0,131,0,0)})
-							Tween(DropDownIcon, newTweenInfo(0.15, Enum.EasingStyle.Sine, Enum.EasingDirection.InOut), {Rotation = (Open and 0) or -90})
 							Callback(Value)
 							DropDownButton.Text = Value
 							Open = false
+							Tween(DropDownFrame, newTweenInfo(0.15, Enum.EasingStyle.Sine, Enum.EasingDirection.InOut), {Size = (Open and newUDim2(0,131,0,140)) or newUDim2(0,131,0,0)})
+							Tween(DropDownIcon, newTweenInfo(0.15, Enum.EasingStyle.Sine, Enum.EasingDirection.InOut), {Rotation = (Open and 0) or -90})
 						end)
 
 					end
