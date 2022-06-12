@@ -313,6 +313,7 @@ function Library.Load(UiName)
 				end)
 				
 			end
+
 			function Section.AddToggle(Name, Callback)
 				local Toggled = false;
 
@@ -384,7 +385,7 @@ function Library.Load(UiName)
 					end)
 				end)
 
-				function Section.AddDropDown(Name, List, Callback)
+				function Section.AddDropDown(DefaultName, ButtonList, Func)
 					local Open = false
 
 					local DropDownButton = Library.Create("TextButton", {
@@ -396,7 +397,7 @@ function Library.Load(UiName)
 						Size = newUDim2(0, 131, 0, 22);
 						AutoButtonColor = false;
 						Font = Enum.Font.SourceSansLight;
-						Text = Name;
+						Text = DefaultName;
 						TextColor3 = UI_Config.TextColors;
 						TextSize = 17.000;
 					})
@@ -434,8 +435,8 @@ function Library.Load(UiName)
 						Open = not Open;
 					end)
 
-					for I = 1, #List do
-						local Value = List[I]
+					for I = 1, #ButtonList do
+						local Value = ButtonList[I]
 
 						local InsideButton = Library.Create("TextButton", {
 							Name = "TextBox";
@@ -461,11 +462,11 @@ function Library.Load(UiName)
 						end)
 
 						Connect(InsideButton.MouseButton1Click, function()
-							Callback(Value)
-							DropDownButton.Text = Value
-							Open = false
 							Tween(DropDownFrame, newTweenInfo(0.15, Enum.EasingStyle.Sine, Enum.EasingDirection.InOut), {Size = (Open and newUDim2(0,131,0,140)) or newUDim2(0,131,0,0)})
 							Tween(DropDownIcon, newTweenInfo(0.15, Enum.EasingStyle.Sine, Enum.EasingDirection.InOut), {Rotation = (Open and 0) or -90})
+							Func(Value)
+							DropDownButton.Text = Value
+							Open = false
 						end)
 
 					end
